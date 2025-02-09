@@ -9,6 +9,7 @@ const cart = () => {
 	const cartTotal = cartModal.querySelector('.cart-total > span');
 	const cartWrapper = document.querySelector('.cart-wrapper');
 	const cartSendBtn = cartModal.querySelector('.cart-confirm');
+	const goodsNo = cartBtn.querySelector('.counter');
 
 	const openCart = () => {
 		const cart = localStorage.getItem('cart')
@@ -22,7 +23,10 @@ const cart = () => {
 			(sum, goodItem) => sum + goodItem.price,
 			0
 		);
+		
 	};
+
+	
 	const closeCart = () => {
 		cartModal.style.display = '';
 	};
@@ -44,6 +48,7 @@ const cart = () => {
 			});
 
 			cart.push(goodsItem);
+			goodsNo.textContent = cart.length;
 			localStorage.setItem('cart', JSON.stringify(cart));
 		}
 	});
@@ -60,6 +65,7 @@ const cart = () => {
 
 			localStorage.setItem('cart', JSON.stringify(cart));
 			renderCart(cart);
+			goodsNo.textContent = cart.length;
 
 			cartTotal.textContent = cart.reduce(
 				(sum, goodItem) => sum + goodItem.price,
